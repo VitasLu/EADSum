@@ -22,17 +22,17 @@ To train the model, follow these steps:
 
 1. Prepare your dataset:
    ```bash
-   python prepare_data.py --input_dir /path/to/raw/data --output_dir /path/to/processed/data
+   python run_utils.py --dataset cnndm
    ```
 
 2. Start training:
    ```bash
-   python train.py --data_dir /path/to/processed/data --output_dir /path/to/model
+   python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type task_prefix --label_type gt --llm palm --alpha 0.5 --batch_size 4
    ```
 
-3. Monitor training progress:
+3. Standard Finetuning
    ```bash
-   tensorboard --logdir /path/to/model/logs
+   python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type standard --label_type gt --batch_size 4
    ```
 
 ## Inference
@@ -40,5 +40,5 @@ To train the model, follow these steps:
 To run inference using a trained model:
 
 ```bash
-python inference.py --model_path /path/to/model/checkpoint.pth --input_file /path/to/input/data.txt
+python inference.py 
 ```
