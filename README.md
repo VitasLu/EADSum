@@ -10,9 +10,10 @@ Brief description of your project.
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/yourproject.git
-cd yourproject
-pip install -r requirements.txt
+git clone https://github.com/VitasLu/EADSum.git
+cd EADSum
+conda env create -f environment.yml
+conda activate EADSum
 ```
 
 ## Training
