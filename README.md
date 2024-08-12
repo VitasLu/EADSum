@@ -22,7 +22,7 @@ To train the model, follow these steps:
 
 1. Prepare your dataset:
    ```bash
-   python run_utils.py --dataset cnndm
+   python data_utils.py --dataset cnndm
    ```
 
 2. Start training:
