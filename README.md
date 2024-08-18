@@ -1,13 +1,11 @@
 # EADSum
 
-Brief description of your project.
-
 ## Table of Contents
 - [Installation](#installation)
 - [Training](#training)
 - [Inference](#inference)
 
-## Installation
+## Installation🔨
 
 ```bash
 git clone https://github.com/VitasLu/EADSum.git
@@ -27,7 +25,7 @@ conda activate EADSum
 },
 ```
 
-## Training
+## Training🦾
 
 To train the model, follow these steps:
 
@@ -46,7 +44,7 @@ To train the model, follow these steps:
    python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type standard --label_type gt --batch_size 4
    ```
 
-## Inference
+## Inference🎊
 
 To run inference using a trained model:
 
