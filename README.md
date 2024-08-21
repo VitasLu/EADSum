@@ -4,6 +4,7 @@
 - [Installation](#installation)
 - [Training](#training)
 - [Inference](#inference)
+- [Evaluation](#evaluation)
 
 ## Installation🔨
 
@@ -14,8 +15,10 @@ conda env create -f environment.yml
 conda activate EADSum
 ```
 
-## Dataset Format🔠
+## Dataset💾
+Original dataset can be downloaded from https://drive.google.com/drive/folders/1qHolqPsnqS2AwpeIpFgNTpf6vz4Kn3VB?usp=sharing
 
+### Dataset Format🔠
 ```bash
 {
 "id": 0,
@@ -29,9 +32,9 @@ conda activate EADSum
 
 To train the model, follow these steps:
 
-1. Prepare your dataset:
+1. Prepare dataset:
    ```bash
-   python data_utils.py --dataset cnndm
+   python DT/data_utils.py --dataset cnndm
    ```
 
 2. Start training:
@@ -49,5 +52,11 @@ To train the model, follow these steps:
 To run inference using a trained model:
 
 ```bash
-python inference.py 
+mkdir output
+python DT/inference.py 
+```
+
+## Evaluation🧑‍🏫
+```bash
+bash evaluation/eva.sh
 ```
