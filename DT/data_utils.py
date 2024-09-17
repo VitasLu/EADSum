@@ -117,7 +117,6 @@ class CNNDMDatasetLoader(DatasetLoader):
         has_valid = False
         split_map = {
             'train': 'train',
-            'test': 'test',
         }
         batch_size = 78706
         train_batch_idxs = range(1)
@@ -130,52 +129,24 @@ class CNNDMDatasetLoader(DatasetLoader):
 
     def load_from_source(self):
         # Load Training set from source
-        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_train_70835.json') as f: 
-            train_dataset = json.load(f)   
-        
-        # Load Test set from source
-        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_test_7871.json') as f:
-            test_dataset = json.load(f)   
+        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_train_78706.json') as f: 
+            train_dataset = json.load(f)    
 
         dataset1 = list()
         for data in train_dataset:
             input = f'{data["src"]}'
-            equation = f'{data["original_summary"]}' # gpt3.5_cot_summary
-            rationale = f'{data["element-aware"]}'
+            equation = f'{data["original_summary"]}' 
 
             dataset1.append({
                 'input': input,
                 'label': equation,
-                'rationale': rationale,
             })
-
-        ## Training set and test set are in the same file
-        # idxs = np.random.RandomState(seed=0).permutation(len(dataset))
-        # train_idxs = idxs[:180]
-        # test_idxs = idxs[181:]
-        # train_dataset = Dataset.from_list(np.array(dataset)[train_idxs].tolist())
-        # test_dataset = Dataset.from_list(np.array(dataset)[test_idxs].tolist())
 
         # Training set and test set are in different files
         train_dataset = Dataset.from_list(np.array(dataset1).tolist())
         
-        dataset2 = list()
-        for data in test_dataset:
-            input = f'{data["src"]}'
-            equation = f'{data["original_summary"]}' # gpt3.5_cot_summary
-            rationale = f'{data["element-aware"]}'
-
-            dataset2.append({
-                'input': input,
-                'label': equation,
-                'rationale': rationale,
-            })
-
-        test_dataset = Dataset.from_list(np.array(dataset2).tolist()) 
-
         datasets = DatasetDict({
             'train': train_dataset,
-            'test': test_dataset
         })
 
         return datasets
@@ -185,53 +156,20 @@ class CNNDMDatasetLoader(DatasetLoader):
         return datasets
 
     def load_llm_preds(self, split):
-        labels = list()
         rationales = list()
 
         # Load Training set from source
-        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_train_70835.json') as f:
+        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_train_78706.json') as f:
             train_dataset = json.load(f)
-
-        # Load Test set from source
-        with open(f'{self.data_root}/{self.dataset_name}/train/cnndm_test_7871.json') as f:
-            test_dataset = json.load(f)
 
         if split == 'train':
             for data in train_dataset:
                 rationale = f'{data["element-aware"]}'
-                label = f'{data["original_summary"]}'
 
                 rationales.append(rationale)
-                labels.append(label)
 
-        else:
-            for data in test_dataset:
-                rationale = f'{data["element-aware"]}'
-                label = f'{data["original_summary"]}'
-
-                rationales.append(rationale)
-                labels.append(label)
-
-        return rationales, labels
-
-    # def _parse_llm_output(self, output):
-    #     rationale_label = output.split('Q:')[0]
-    #     rationale_label = rationale_label.rstrip()
-    #     try:
-    #         rationale, label = output.split('The answer is')
-    #     except:
-    #         rationale = ' '
-    #         label = ' '
-    #         return rationale, label
-            
-    #     rationale = rationale.rstrip()
-    #     try:
-    #         label = re.search(r'\(.*\)', label).group(0)
-    #     except:
-    #         label = ' '
-
-    #     return rationale, label
-
+        return rationales
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str, required=True)
@@ -244,5 +182,4 @@ if __name__ == '__main__':
 
     datasets = dataset_loader.load_from_source()
     dataset_loader.to_json(datasets)
-    rationales, labels = dataset_loader.load_llm_preds(split='train')
-    # print(rationales, labels)
+    rationales = dataset_loader.load_llm_preds(split='train')
