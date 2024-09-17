@@ -39,7 +39,7 @@ To train the model, follow these steps:
 
 2. Start training:
    ```bash
-   python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type task_prefix --label_type gt --llm palm --alpha 0.5 --batch_size 4
+   python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type task_prefix --label_type gt --llm gpt --alpha 0.5 --batch_size 4
    ```
 
 3. Standard Finetuning
