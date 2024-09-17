@@ -3,7 +3,6 @@ import shutil
 import logging
 
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer
-from transformers import T5ForConditionalGeneration, LongT5ForConditionalGeneration
 from transformers import DataCollatorForSeq2Seq
 from transformers.trainer_utils import set_seed
 from transformers import AutoModelForSeq2SeqLM
@@ -18,7 +17,6 @@ def get_config_dir(args):
 def train_and_evaluate(args, run, tokenizer, tokenized_datasets, compute_metrics):
     set_seed(run)
 
-    # model = T5ForConditionalGeneration.from_pretrained(args.from_pretrained)
     model = AutoModelForSeq2SeqLM.from_pretrained(args.from_pretrained)
 
     if args.parallelize:
@@ -26,7 +24,7 @@ def train_and_evaluate(args, run, tokenizer, tokenized_datasets, compute_metrics
     
     config_dir = get_config_dir(args)
     # output_dir = f'ckpts/{config_dir}/{run}'  # for model ckpts
-    output_dir = "./baseline/T5-base/FT20-1"  # for model ckpts
+    output_dir = "./baseline/T5-base/DT20"  # for model ckpts
     logging_dir = f'logs/{config_dir}/{run}'  # for training logs
 
     if args.no_log:
