@@ -160,5 +160,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     run(args)
-
-    # CUDA_VISIBLE_DEVICES=1 python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type task_prefix --label_type gt --llm gpt --alpha 0.5 --batch_size 2
