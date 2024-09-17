@@ -45,7 +45,7 @@ class DatasetLoader(object):
     def load_from_json(self):
         data_files = {
             'train': f'{self.data_root}/{self.dataset_name}/{self.dataset_name}_train.json',
-            'test': f'{self.data_root}/{self.dataset_name}/{self.dataset_name}_test.json',
+            # 'test': f'{self.data_root}/{self.dataset_name}/{self.dataset_name}_test.json',
         }
 
         if self.has_valid:
