@@ -15,10 +15,10 @@ conda env create -f environment.yml
 conda activate EADSum
 ```
 
-## Dataset💾
+## Dataset 💾
 Original dataset can be downloaded from https://drive.google.com/drive/folders/1qHolqPsnqS2AwpeIpFgNTpf6vz4Kn3VB?usp=sharing
 
-### Dataset Format🔠
+### Dataset Format 🔠
 ```bash
 {
 "id": 0,
@@ -28,7 +28,7 @@ Original dataset can be downloaded from https://drive.google.com/drive/folders/1
 },
 ```
 
-## Training🦾
+## Training 🦾
 
 To train the model, follow these steps:
 
@@ -47,7 +47,7 @@ To train the model, follow these steps:
    python DT/run.py --from_pretrained google-t5/t5-base --dataset cnndm --model_type standard --label_type gt --batch_size 4
    ```
 
-## Inference🎊
+## Inference 🎊
 
 To run inference using a trained model:
 
@@ -56,7 +56,7 @@ mkdir output
 python DT/inference.py 
 ```
 
-## Evaluation🧑‍🏫
+## Evaluation 🧑‍🏫
 ```bash
 bash evaluation/eva.sh
 ```
